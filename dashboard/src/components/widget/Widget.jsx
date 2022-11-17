@@ -2,12 +2,13 @@ import React from 'react'
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
+import { studentsColumns,studentsRows } from '../../dataStudentsSource';
 import './widget.scss';
 
 const Widget = ({ type }) => {
   let data;
   // temp
-  const amount = 500;
+  const studentsNum = studentsRows.length;
   const diff = 30;
 
   switch (type) {
@@ -65,7 +66,7 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {data.isMoney && "$"} {studentsNum}
         </span>
         <span className="link">{data.link}</span>
       </div>

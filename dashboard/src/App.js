@@ -50,7 +50,7 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  const [token, setToken] = useState();
+ 
   return (
     <div className="App">
       <RouterProvider router={router} />
