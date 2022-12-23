@@ -1,16 +1,32 @@
-import React,{useState} from 'react'
+import axios from "axios";
+import React,{useState,useEffect} from 'react'
 import "./DataStudentsTable.scss"
 import { DataGrid} from '@mui/x-data-grid';
-import { studentsColumns,studentsRows } from '../../dataStudentsSource';
 import { Link } from "react-router-dom";
 
 
 const DataStudentsTable = () => {
-  const[data ,setData] = useState(studentsRows);
+  const[data ,setData] = useState([]);
+  
+  useEffect(()=>{
+    axios.get(`http://127.0.0.1:3001/student/`)
+    .then((res)=>{
+      console.log(res.data[0].idstudents);
+     setData(res.data);
+    })
+    //id()
+ },[])
+ console.log(data);
+ const id =()=>{
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };  
+  data.length ? data.map((ele)=>{
+    console.log(ele.idstudents,'pppp');
+
+  }):console.log('still waiting');
+ }
+  // const handleDelete = (id) => {
+  //   setData(data.filter((item) => item.id !== id));
+  // };  
 
   const actionColumn = [
     {
@@ -23,12 +39,12 @@ const DataStudentsTable = () => {
              <Link to="/students/studentsId" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
               </Link>
-            <div
+            {/* <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
               >Delete
               
-            </div>
+            </div> */}
           </div>
         );
       },
@@ -45,8 +61,9 @@ const DataStudentsTable = () => {
       </div>
       <DataGrid
       className='datagrid'
+      getRowId={data[0].idstudents}
         rows={data}
-        columns={studentsColumns.concat(actionColumn)}
+        columns={data.concat(actionColumn)}
         pageSize={8}
         rowsPerPageOptions={[5]}
         checkboxSelection

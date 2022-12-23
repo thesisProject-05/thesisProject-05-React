@@ -1,10 +1,18 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
+import axios from "axios";
 import "./datahouseowner.scss"
 import { DataGrid} from '@mui/x-data-grid';
-import { houseownerColumns,houseownerRows } from '../../dataHouseOwnerSource';
+import { houseownerColumns} from '../../dataHouseOwnerSource';
+import { Link } from "react-router-dom";
 const DataHouseOwnerTable = () => {
-  const[data ,setData] = useState(houseownerRows)
-
+  const[data ,setData] = useState([])
+  useEffect(()=>{
+    axios.get(`http://localhost:3001/owner/`)
+    .then((res)=>{
+      console.log(res.data);
+     setData(res.data);
+    })
+ },[])
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };  
@@ -31,7 +39,9 @@ const DataHouseOwnerTable = () => {
     <div className='datahouseownertable'>
       <div className="datahouseownerTableTitle">
         <span>Add New House Owner</span>
+        <Link to="/houseOwner/:houseOwnerId/new" style={{ textDecoration: "none" }}>
         <span className="link">Add New</span>
+        </Link>
       </div>
       <DataGrid
       className='datagrid'

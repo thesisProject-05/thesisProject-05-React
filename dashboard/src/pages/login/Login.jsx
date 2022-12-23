@@ -3,22 +3,18 @@ import "./login.scss";
 const Login = () => {
 
   return (
-    <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form>
-        <label>
-          <p>Username</p>
-          <input type="text" />
-        </label>
-        <label>
-          <p>Password</p>
-          <input type="password" />
-        </label>
-        <div>
-          <button type="submit">Login</button>
-        </div>
-      </form>
+    <div class="container">
+    <div class="form">
+      <form action="#" class="login-form">
+        Admin login
+        <input type="text" name="username" placeholder="Username"/>
+        <input type="text" name="password" placeholder="Password"/>
+        <button type="submit" class="btn">Login</button>
+        
+    </form>
+      
     </div>
+  </div>
   )
 }
 
